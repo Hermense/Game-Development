@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dec3y21fapv6s"]
+
+[ext_resource type="Script" uid="uid://cabcyre012bpt" path="res://a.gd" id="1_whoah"]
+
+[node name="Node2D" type="Node2D" unique_id=25043241]
+script = ExtResource("1_whoah")
+
+[node name="Label" type="Label" parent="." unique_id=621589137]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Hello Godot!"

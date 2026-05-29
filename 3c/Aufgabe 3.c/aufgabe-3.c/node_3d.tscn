@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://bwdyrfnna47fa"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_4xowi"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_a202f"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_noarx"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a0tk4"]
+
+[sub_resource type="Sky" id="Sky_r3fl7"]
+sky_material = SubResource("ProceduralSkyMaterial_a0tk4")
+
+[sub_resource type="Environment" id="Environment_jka67"]
+background_mode = 2
+background_energy_multiplier = 1.31
+sky = SubResource("Sky_r3fl7")
+ambient_light_color = Color(0, 0, 0.32156864, 1)
+
+[sub_resource type="Animation" id="Animation_i5arm"]
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D3:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 0.28717452),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(6.2831855, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_wc5p8"]
+resource_name = "spin "
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D3:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.2831855, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jsk3o"]
+_data = {
+&"RESET": SubResource("Animation_i5arm"),
+&"spin ": SubResource("Animation_wc5p8")
+}
+
+[node name="Node3D" type="Node3D" unique_id=1168683532]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=157546126]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+mesh = SubResource("BoxMesh_4xowi")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=711720220]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
+mesh = SubResource("SphereMesh_a202f")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=1153324044]
+mesh = SubResource("CylinderMesh_noarx")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1476760100]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7241703, 0.36681104, 3.4021592)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=424649973]
+transform = Transform3D(-0.28050786, -0.23977089, 0.929422, 0.43143913, -0.89646417, -0.10105629, 0.8574239, 0.37264192, 0.35491177, 0, 0, 0)
+light_color = Color(0.98039216, 1, 0.37254903, 1)
+light_energy = 2.63
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=951610421]
+environment = SubResource("Environment_jka67")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=459037656]
+libraries/ = SubResource("AnimationLibrary_jsk3o")
+autoplay = &"RESET"

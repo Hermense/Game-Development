@@ -1,0 +1,112 @@
+[gd_scene format=3 uid="uid://ceuu150fmggvr"]
+
+[ext_resource type="PackedScene" uid="uid://d0ypm0v45pwdv" path="res://art/player.glb" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://cnd3r3qyfy5so" path="res://player.gd" id="1_onrkg"]
+[ext_resource type="AudioStream" uid="uid://c6xnbaalakjhw" path="res://art/350906__cabled_mess__jump_c_04.wav" id="3_hqtel"]
+[ext_resource type="AudioStream" uid="uid://b0nwwtk0arikg" path="res://art/37162__volivieri__soccer-stomp-02.wav" id="4_sweqy"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_onrkg"]
+radius = 1.1817989
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_onrkg"]
+height = 0.35025024
+radius = 1.4023438
+
+[sub_resource type="Animation" id="Animation_onrkg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Character:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.7560222, 0.53966546, -1.1978407)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/Character:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_i3pqv"]
+resource_name = "float"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Character:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.3, 0.7, 1.2),
+"transitions": PackedFloat32Array(0.23325807, 0.46651652, 4.594793),
+"update": 0,
+"values": [Vector3(-0.7560222, 0.53966546, -1.1978407), Vector3(-0.756, 0.65, -1.198), Vector3(-0.756, 0.35, -1.198)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/Character:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.50092185, 1.2),
+"transitions": PackedFloat32Array(0.23325807, 0.46651652, 4.594793),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.13962634, 0, 0), Vector3(-0.15707964, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hqtel"]
+_data = {
+&"RESET": SubResource("Animation_onrkg"),
+&"float": SubResource("Animation_i3pqv")
+}
+
+[node name="Player" type="CharacterBody3D" unique_id=241616030]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.049827337, 0.05048108, 0)
+collision_mask = 6
+script = ExtResource("1_onrkg")
+
+[node name="Pivot" type="Node3D" parent="." unique_id=811732646]
+
+[node name="Character" parent="Pivot" unique_id=211261131 instance=ExtResource("1_4flbx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7560222, 0.53966546, -1.1978407)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1821544934]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 0.7082591, -1.3089206)
+shape = SubResource("SphereShape3D_onrkg")
+
+[node name="MobDetector" type="Area3D" parent="." unique_id=1488982115]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MobDetector" unique_id=990970340]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.77190655, 0.85002744, -0.93551564)
+shape = SubResource("CylinderShape3D_onrkg")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1586510144]
+libraries/ = SubResource("AnimationLibrary_hqtel")
+autoplay = &"float"
+
+[node name="JumpSound" type="AudioStreamPlayer" parent="." unique_id=2066027359]
+stream = ExtResource("3_hqtel")
+autoplay = true
+
+[node name="SquashSound" type="AudioStreamPlayer" parent="." unique_id=1057851545]
+stream = ExtResource("4_sweqy")
+autoplay = true
+
+[connection signal="body_entered" from="MobDetector" to="." method="_on_mob_detector_body_entered"]

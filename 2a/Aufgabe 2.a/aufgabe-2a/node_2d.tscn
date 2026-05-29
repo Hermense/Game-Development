@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://6jkt58vcu487"]
+
+[ext_resource type="Script" uid="uid://ba7pcgmb2aof0" path="res://node_2d.gd" id="1_wtcfe"]
+[ext_resource type="Texture2D" uid="uid://cl1tuspiju685" path="res://icon.svg" id="2_0e48y"]
+[ext_resource type="Script" uid="uid://147gaec1aap5" path="res://area_2d_1.gd" id="2_q6r6c"]
+[ext_resource type="Script" uid="uid://7gll5xinm04i" path="res://area_2d_2.gd" id="4_kdubu"]
+[ext_resource type="Script" uid="uid://ctig1uqk1gaf6" path="res://area_2d_3.gd" id="5_d21ai"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wtcfe"]
+size = Vector2(197.625, 459)
+
+[node name="Node2D" type="Node2D" unique_id=1953385037]
+script = ExtResource("1_wtcfe")
+
+[node name="Area2D1" type="Area2D" parent="." unique_id=1819480983]
+position = Vector2(15, -18)
+script = ExtResource("2_q6r6c")
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D1" unique_id=1495847760]
+position = Vector2(748.00006, 380)
+rotation = -2.6179938
+scale = Vector2(1.2043618, 1.1253538)
+texture = ExtResource("2_0e48y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D1" unique_id=1154272754]
+position = Vector2(679.00006, 162.99998)
+rotation = -1.5777776
+shape = SubResource("RectangleShape2D_wtcfe")
+debug_color = Color(0.9111165, 0.25855204, 0.37995222, 0.41960785)
+
+[node name="Area2D2" type="Area2D" parent="." unique_id=421544030]
+position = Vector2(25, 36)
+script = ExtResource("4_kdubu")
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D2" unique_id=920867659]
+position = Vector2(490, 291)
+rotation = 0.9896017
+scale = Vector2(1.2117335, 1.1806682)
+texture = ExtResource("2_0e48y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2" unique_id=237447984]
+position = Vector2(1042, 324)
+shape = SubResource("RectangleShape2D_wtcfe")
+debug_color = Color(0.7703927, 0.44440395, 0.05444494, 0.41960785)
+
+[node name="Area2D3" type="Area2D" parent="." unique_id=857969216]
+position = Vector2(-272, 29)
+script = ExtResource("5_d21ai")
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D3" unique_id=1967954185]
+position = Vector2(599, 381)
+rotation = -0.87266463
+scale = Vector2(1.224924, 1.1406085)
+texture = ExtResource("2_0e48y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D3" unique_id=1448110291]
+position = Vector2(469, 238)
+scale = Vector2(2, 1)
+shape = SubResource("RectangleShape2D_wtcfe")
+debug_color = Color(0.15311527, 0.6434094, 0.14327571, 0.41960785)
+
+[connection signal="input_event" from="Area2D1" to="Area2D1" method="_on_input_event"]
+[connection signal="input_event" from="Area2D2" to="Area2D2" method="_on_input_event"]
+[connection signal="input_event" from="Area2D3" to="Area2D3" method="_on_input_event"]

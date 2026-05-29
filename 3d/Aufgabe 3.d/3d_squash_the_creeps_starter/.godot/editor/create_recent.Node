@@ -1,0 +1,14 @@
+AudioStreamPlayer
+AudioStreamPlayer3D
+AnimationPlayer
+Label
+ColorRect
+Control
+CollisionShape3D
+Area3D
+VisibleOnScreenNotifier3D
+Timer
+PathFollow3D
+Path3D
+MeshInstance3D
+Node3D
